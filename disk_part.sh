@@ -10,17 +10,14 @@ dd if=/dev/zero of=$wwn bs=512 count=1
 
 # partition disk
 sfdisk /dev/sda <<EOF
-Disk /dev/sda: 238.5 GiB, 256060514304 bytes, 500118192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disklabel type: dos
-Disk identifier: 0x4d2465be
+label: dos
+label-id: 0x71ca4d59
+device: /dev/sda
+unit: sectors
 
-Device     Boot    Start       End   Sectors  Size Id Type
-/dev/sda1           2048   1050623   1048576  512M  c W95 FAT32 (LBA)
-/dev/sda2        1050624  34605055  33554432   16G 82 Linux swap / Solaris
-/dev/sda3       34605056 500118191 465513136  222G bf Solaris
+/dev/sda1 : start=        2048, size=     1048576, type=c, bootable
+/dev/sda2 : start=     1050624, size=    33554432, type=82
+/dev/sda3 : start=    34605056, size=   465513136, type=bf
 EOF
 
 # create zfs partitions
