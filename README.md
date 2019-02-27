@@ -30,8 +30,7 @@ modprobe zfs
 
 partition ssd
 ```
-sda mbr partition table
-sda1 boot fat32
-sda2 swap luks-swap
-sda3 rpool w/ native encryption
+/dev/sda1  *        2048   1050623   1048576  512M  c W95 FAT32 (LBA)
+/dev/sda2        1050624  34605055  33554432   16G  0 Empty
+/dev/sda3       34605056 500118191 465513136  222G  0 Empty
 ```
