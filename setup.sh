@@ -4,11 +4,10 @@ echo "deb-src http://deb.debian.org/debian/ stretch main contrib non-free" >> /e
 
 # install build dependencies for zfs
 apt-get update
-apt-get install -y build-essential autoconf libtool gawk alien fakeroot
-apt-get install -y zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux-dev libudev-dev
-apt-get install -y parted lsscsi ksh libssl-dev libelf-dev
-apt-get install -y linux-headers-$(uname -r)
-apt-get install -y git gdebi python3-dev python3-setuptools python3-cffi cryptsetup
+apt-get install -y build-essential autoconf libtool gawk alien fakeroot \
+  zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux-dev libudev-dev \
+  parted lsscsi ksh libssl-dev libelf-dev linux-headers-$(uname -r) \
+  git gdebi python3-dev python3-setuptools python3-cffi cryptsetup
 
 # clone & build zfs
 git clone https://github.com/zfsonlinux/zfs
