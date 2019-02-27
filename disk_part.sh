@@ -1,10 +1,14 @@
 # partition ssd
 wwn=$(ls -1 /dev/disk/by-id/wwn-* | grep -v "\-part[0-9]$")
 
-# create FAT32 boot partition (run twice to make sure its ded)
+# clean partition table
 sgdisk --zap-all $wwn
 sgdisk --zap-all $wwn
 
+# write 512 bits to beginning of disk in case theres an existing MBR
+dd if=/dev/zero of=$wwn bs=512 count=1
+
+# partition disk
 sfdisk /dev/sda <<EOF
 Disk /dev/sda: 238.5 GiB, 256060514304 bytes, 500118192 sectors
 Units: sectors of 1 * 512 = 512 bytes
@@ -20,6 +24,7 @@ Device     Boot    Start       End   Sectors  Size Id Type
 EOF
 
 # create zfs partitions
+#TODO add encryption
 zpool create -O canmount=off -O mountpoint=/ -R /mnt/ rpool $wwn-part1
 zfs create -o canmount=off -o mountpoint=none rpool/ROOT
 zfs create -o canmount=noauto -o mountpoint=/ rpool/ROOT/debian
@@ -30,10 +35,3 @@ zpool set bootfs=rpool/ROOT/debian rpool
 #cryptsetup -y -v luksFormat /dev/sda2
 #cryptsetup luksOpen /dev/disk/by-id/wwn-[SDA_ID]-part2 luks-swap 
 #mkswap -f /dev/mapper/luks-swap
-
-# add zfs pool + partition
-#TODO add native encryption
-#zpool create -O mountpoint=/ -R /mnt rpool /dev/disk/by-id/wwn-[ID]-part3
-#zfs create -o mountpoint=none rpool/ROOT
-#zfs create -o mountpoint=/ rpool/ROOT/debian
-#zpool set bootfs=rpool/ROOT/debian rpool
