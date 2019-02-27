@@ -25,7 +25,7 @@ EOF
 
 # create zfs partitions
 #TODO add encryption
-zpool create -O canmount=off -O mountpoint=/ -R /mnt/ rpool $wwn-part1
+zpool create -O canmount=off -O mountpoint=/ -R /mnt/ rpool $wwn-part3
 zfs create -o canmount=off -o mountpoint=none rpool/ROOT
 zfs create -o canmount=noauto -o mountpoint=/ rpool/ROOT/debian
 zfs mount rpool/ROOT/debian
