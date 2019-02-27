@@ -19,7 +19,17 @@ dpkg-reconfigure locales
 apt-get install -y build-essential autoconf libtool gawk alien fakeroot \
   zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux-dev libudev-dev \
   parted lsscsi ksh libssl-dev libelf-dev linux-headers-$(uname -r) \
-  git gdebi python3-dev python3-setuptools python3-cffi cryptsetup
+  git gdebi python3-dev python3-setuptools python3-cffi cryptsetup firmware-iwlwifi
+
+git clone --depth=1 https://github.com/zfsonlinux/zfs
+cd zfs/
+sh autogen.sh
+./configure --with-config=user
+make pkg-utils deb-dkms
+
+# install zfs
+for file in *.deb; do gdebi -q --non-interactive $file; done
+modprobe zfs
 
 # mount pseudo filesystems & chroot into i
 # install zfs build dependencies
