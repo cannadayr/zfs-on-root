@@ -22,19 +22,3 @@ zpool create -O mountpoint=/ -R /mnt rpool /dev/disk/by-id/wwn-[ID]-part3
 zfs create -o mountpoint=none rpool/ROOT
 zfs create -o mountpoint=/ rpool/ROOT/debian
 zpool set bootfs=rpool/ROOT/debian rpool
-
-# install OS
-debootstrap stretch /mnt/
-
-# configure os
-cp /etc/apt/sources.list.d/base.list /mnt/etc/apt/sources.list
-
-# mount pseudo filesystems & chroot into it
-# install zfs build dependencies
-# install locale
-# dpkg-reconfigure locale
-# build + install zfs
-# install bootloader
-# exit
-# umount
-# reboot
