@@ -31,11 +31,6 @@ make pkg-utils deb-dkms
 # install zfs
 for file in *.deb; do gdebi -q --non-interactive $file; done
 
-# mount pseudo filesystems & chroot into i
-# install zfs build dependencies
-# install locale
-# dpkg-reconfigure locale
-# build + install zfs
 # install bootloader
 # exit
 # umount
