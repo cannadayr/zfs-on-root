@@ -1,5 +1,16 @@
 # partition ssd
+wwn=$(ls -1 /dev/disk/by-id/wwn-* | grep -v "\-part[0-9]$")
+
+# create FAT32 boot partition (run twice to make sure its ded)
+sgdisk --zap-all $wwn
+sgdisk --zap-all $wwn
+
+# create boot partition
+sgdisk -n1:0:0 -t1:BF01 $wwn
+
+
 #TODO script here
+
 #Units: sectors of 1 * 512 = 512 bytes
 #Sector size (logical/physical): 512 bytes / 4096 bytes
 #I/O size (minimum/optimal): 4096 bytes / 4096 bytes
