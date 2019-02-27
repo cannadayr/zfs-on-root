@@ -10,7 +10,7 @@ apt-get install -y build-essential autoconf libtool gawk alien fakeroot \
   git gdebi python3-dev python3-setuptools python3-cffi cryptsetup
 
 # clone & build zfs
-git clone https://github.com/zfsonlinux/zfs
+git clone --depth=1 https://github.com/zfsonlinux/zfs
 cd zfs/
 sh autogen.sh
 ./configure --with-config=user
@@ -40,16 +40,16 @@ modprobe zfs
 
 # add zfs pool + partition
 #TODO add native encryption
-zpool create -O mountpoint=/ -R /mnt rpool /dev/disk/by-id/wwn-[ID]-part3
-zfs create -o mountpoint=none rpool/ROOT
-zfs create -o mountpoint=/ rpool/ROOT/debian
-zpool set bootfs=rpool/ROOT/debian rpool
+#zpool create -O mountpoint=/ -R /mnt rpool /dev/disk/by-id/wwn-[ID]-part3
+#zfs create -o mountpoint=none rpool/ROOT
+#zfs create -o mountpoint=/ rpool/ROOT/debian
+#zpool set bootfs=rpool/ROOT/debian rpool
 
 # install OS
-debootstrap stretch /mnt/
+#debootstrap stretch /mnt/
 
 # configure os
-cp /etc/apt/sources.list.d/base.list /mnt/etc/apt/sources.list
+#cp /etc/apt/sources.list.d/base.list /mnt/etc/apt/sources.list
 
 # mount pseudo filesystems & chroot into it
 # install zfs build dependencies
