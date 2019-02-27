@@ -30,7 +30,6 @@ make pkg-utils deb-dkms
 
 # install zfs
 for file in *.deb; do gdebi -q --non-interactive $file; done
-modprobe zfs
 
 # mount pseudo filesystems & chroot into i
 # install zfs build dependencies
