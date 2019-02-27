@@ -25,7 +25,7 @@ modprobe zfs
 #Sector size (logical/physical): 512 bytes / 4096 bytes
 #I/O size (minimum/optimal): 4096 bytes / 4096 bytes
 #Disklabel type: dos
-#Disk identifier: 0xe6719167
+#Disk identifier: [id]
 #
 #Device     Boot    Start       End   Sectors  Size Id Type
 #/dev/sda1           2048   1050623   1048576  512M  c W95 FAT32 (LBA)
