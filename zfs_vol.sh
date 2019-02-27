@@ -1,4 +1,6 @@
 # create zfs partitions
+wwn=$(ls -1 /dev/disk/by-id/wwn-* | grep -v "\-part[0-9]$")
+
 #TODO add encryption
 zpool create -O canmount=off -O mountpoint=/ -R /mnt/ rpool $wwn-part3
 zfs create -o canmount=off -o mountpoint=none rpool/ROOT
