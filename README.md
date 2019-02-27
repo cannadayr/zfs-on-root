@@ -25,4 +25,13 @@ make pkg-utils deb-dkms
 install zfs
 ```
 for file in *.deb; do gdebi -q --non-interactive $file; done
+modprobe zfs
+```
+
+partition ssd
+```
+sda mbr partition table
+sda1 boot fat32
+sda2 swap luks-swap
+sda3 rpool w/ native encryption
 ```
