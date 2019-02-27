@@ -15,6 +15,7 @@ ln -s /proc/self/mounts /etc/mtab
 apt-get update
 apt-get install -y locales
 dpkg-reconfigure locales
+dpkg-reconfigure tzdata
 
 apt-get install -y build-essential autoconf libtool gawk alien fakeroot \
   zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux-dev libudev-dev \
