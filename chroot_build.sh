@@ -40,6 +40,11 @@ apt-get install -y grub-pc
 update-initramfs -u -k all
 update-grub
 grub-install /dev/disk/by-id/$wwn
+
+
+#UUID=[UUID] /boot vfat defaults 0 1
+#$wwn-part3 / zfs defaults 0 0
+
 #zfs snapshot rpool/ROOT/debian@install
 
 # install bootloader
