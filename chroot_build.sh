@@ -32,6 +32,8 @@ make pkg-utils deb-dkms
 # install zfs
 for file in *.deb; do gdebi -q --non-interactive $file; done
 
+apt-get install -y grub-pc
+
 # install bootloader
 # exit
 # umount
