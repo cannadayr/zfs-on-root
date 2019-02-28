@@ -9,13 +9,18 @@ sgdisk --zap-all $wwn
 dd if=/dev/zero of=$wwn bs=512 count=1
 
 # partition disk
-sfdisk /dev/sda <<EOF
-label: dos
-label-id: 0x71ca4d59
-device: /dev/sda
-unit: sectors
+# bios boot paritition
+sgdisk -a1 -n2:34:2047  -t2:EF02 $wwn
+# root zfs fs
+sgdisk     -n1:0:0      -t1:BF01 $wwn
 
-/dev/sda1 : start=        2048, size=     1048576, type=c, bootable
-/dev/sda2 : start=     1050624, size=    33554432, type=82
-/dev/sda3 : start=    34605056, size=   465513136, type=bf
-EOF
+#sfdisk /dev/sda <<EOF
+#label: dos
+#label-id: 0x71ca4d59
+#device: /dev/sda
+#unit: sectors
+#
+#/dev/sda1 : start=        2048, size=     1048576, type=c, bootable
+#/dev/sda2 : start=     1050624, size=    33554432, type=82
+#/dev/sda3 : start=    34605056, size=   465513136, type=bf
+#EOF

@@ -2,16 +2,16 @@
 wwn=$(ls -1 /dev/disk/by-id/wwn-* | grep -v "\-part[0-9]$")
 
 #TODO add encryption
-zpool create -O canmount=off -O mountpoint=/ -R /mnt/ rpool $wwn-part3
+zpool create -O canmount=off -O mountpoint=/ -R /mnt/ rpool $wwn-part1
 zfs create -o canmount=off -o mountpoint=none rpool/ROOT
 zfs create -o canmount=noauto -o mountpoint=/ rpool/ROOT/debian
 zpool set bootfs=rpool/ROOT/debian rpool
 
 # mount stuff
 zfs mount rpool/ROOT/debian
-mkdir /mnt/boot
-mkfs.vfat $wwn-part1
-mount $wwn-part1 /mnt/boot
+#mkdir /mnt/boot
+#mkfs.vfat $wwn-part1
+#mount $wwn-part1 /mnt/boot
 
 # encrypt swap #TODO add back in
 #cryptsetup -y -v luksFormat /dev/sda2
