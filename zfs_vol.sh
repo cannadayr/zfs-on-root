@@ -10,6 +10,7 @@ zpool set bootfs=rpool/ROOT/debian rpool
 # mount stuff
 zfs mount rpool/ROOT/debian
 mkdir /mnt/boot
+mkfs.vfat $wwn-part1
 mount $wwn-part1 /mnt/boot
 
 # encrypt swap #TODO add back in
