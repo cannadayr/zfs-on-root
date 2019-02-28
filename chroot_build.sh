@@ -1,3 +1,5 @@
+wwn=$(ls -1 /dev/disk/by-id/wwn-* | grep -v "\-part[0-9]$")
+
 # install OS
 debootstrap stretch /mnt/
 
@@ -36,6 +38,10 @@ for file in *.deb; do gdebi -q --non-interactive $file; done
 apt-get install -y grub-pc
 
 update-initramfs -u -k all
+update-grub
+grub-install /dev/disk/by-id/$wwn
+#zfs snapshot rpool/ROOT/debian@install
+
 # install bootloader
 # exit
 # umount
